@@ -1,0 +1,68 @@
+﻿<Window x:Class="Test2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="510" Width="860" ResizeMode="NoResize">
+	<Grid Margin="0,0,10,7">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="400" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<TabControl Background="{x:Null}" BorderBrush="LightGray" Grid.ColumnSpan="2">
+			<TabItem x:Name="twitch_tab" Header="Twitch" Background="#FFF0F0F0" BorderBrush="LightGray" Grid.ColumnSpan="2" Margin="0,0,70,0">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="120" />
+						<RowDefinition Height="180" />
+						<RowDefinition Height="30" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="80" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+
+						<!--<Label Content="This feature allows Twitch chat to vote for an ingame effect. The selected effect will be triggered each time the timer runs out. &#xA; Here are all mandatory fields that need to be configured.&#xA;Consult the twitch__readme.txt file included with the mod (inside the README folder) for more information." Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" /> -->
+					</Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="80" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="730" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<CheckBox x:Name="twitch_user_agreed" Content="Enable Twitch Voting" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="twitch_user_agreed_Clicked" />
+					</Grid>
+
+				<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="290" />
+							<ColumnDefinition Width="10" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="40" />
+							<RowDefinition Height="40" />
+							<RowDefinition Height="40" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+
+						<Label x:Name="twitch_user_channel_name_label" Content="Channel Name" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+						<TextBox x:Name="twitch_user_channel_name" Width="120" Height="20" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<Label x:Name="twitch_user_user_name_label" Content="Username" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+						<TextBox x:Name="twitch_user_user_name" Width="120" Height="20" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<Label x:Name="twitch_user_channel_oauth_label" Content="OAuth Token" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+						<PasswordBox x:Name="twitch_user_channel_oauth" Width="120" Height="20" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+					</Grid>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>
