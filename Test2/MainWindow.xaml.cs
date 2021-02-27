@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 namespace Test2
 {
@@ -9,53 +8,59 @@ namespace Test2
 	public partial class MainWindow : Window
 	{
 
-		private OptionsFile twitchFile = new OptionsFile("twitch.ini");
+		private Options twitchFile;
 
 
 		public MainWindow()
 		{
+			Init();
+		}
+
+		private void Init()
+		{
 			InitializeComponent();
+
+			twitchFile = OptionsFile.readFile("twitch.xml");
 
 			InitTwitchTab();
 		}
 
 		private void InitTwitchTab()
 		{
-			TwitchTabHandleAgreed();
+			enable_twitch_voting.IsChecked = twitchFile.enableTwitchVoting.Equals("True");
+			twitch_channel_oauth.Password = twitchFile.oAuth;
+			twitch_channel_name.Text = twitchFile.twitchChannelName;
+			twitch_user_name.Text = twitchFile.twitchUserName;
+
+			initializeTwitchFieldEditability();
         }
 
-		private void twitch_user_agreed_Clicked(object sender, RoutedEventArgs e)
+		private void enable_twitch_voting_clicked_event(object sender, RoutedEventArgs e)
 		{
-			TwitchTabHandleAgreed();
+			initializeTwitchFieldEditability();
 		}
 
 
-        void TwitchTabHandleAgreed()
+        void initializeTwitchFieldEditability()
         {
-            bool agreed = twitch_user_agreed.IsChecked.GetValueOrDefault();
+            bool agreed = enable_twitch_voting.IsChecked.GetValueOrDefault();
 
-            twitch_user_channel_name_label.IsEnabled = agreed;
-            twitch_user_channel_name.IsEnabled = agreed;
-            twitch_user_channel_oauth_label.IsEnabled = agreed;
-            twitch_user_channel_oauth.IsEnabled = agreed;
-            twitch_user_user_name_label.IsEnabled = agreed;
-            twitch_user_user_name.IsEnabled = agreed;
+			//chenge the editability of other twitch related fields
+			twitch_channel_name.IsEnabled = agreed;
+            twitch_channel_oauth.IsEnabled = agreed;
+            twitch_user_name.IsEnabled = agreed;
         }
 
-		private void OnlyNumbersPreviewTextInput(object sender, TextCompositionEventArgs e)
+		private void save_click_event(object sender, RoutedEventArgs e)
 		{
-			Utils.HandleOnlyNumbersPreviewTextInput(e);
+			twitchFile.enableTwitchVoting =  enable_twitch_voting.IsChecked.GetValueOrDefault().ToString();
+			twitchFile.oAuth = twitch_channel_oauth.Password;
+			twitchFile.twitchChannelName = twitch_channel_name.Text;
+			twitchFile.twitchUserName = twitch_user_name.Text;
+
+			OptionsFile.writeFile(twitchFile);
+			MessageBox.Show("To see the changes refresh the index.html file in the browser and re-add it to OBS.");
 		}
 
-
-		private void NoSpacePreviewKeyDown(object sender, KeyEventArgs e)
-		{
-			Utils.HandleNoSpacePreviewKeyDown(e);
-		}
-
-		private void NoCopyPastePreviewExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			Utils.HandleNoCopyPastePreviewExecuted(e);
-		}
 	}
 }
