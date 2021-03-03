@@ -16,6 +16,8 @@ namespace Test2
     public class Options
     {
 
+        public static string fileName= "twitch.xml";
+
         [XmlElement("enableTwitchVoting", Form = XmlSchemaForm.Unqualified)]
         public string enableTwitchVoting { get; set; }
 
@@ -46,11 +48,11 @@ namespace Test2
     internal class OptionsFile
 	{
 
-        public static Options readFile(string fileName)
+        public static Options readFile()
         {
             Options objectOut = Options.createDefaultOptions();
 
-            if (!File.Exists(fileName) || string.IsNullOrEmpty(fileName))
+            if (!File.Exists(Options.fileName) || string.IsNullOrEmpty(Options.fileName))
             {
                 return objectOut;
             }
@@ -58,7 +60,7 @@ namespace Test2
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileName);
+                xmlDocument.Load(Options.fileName);
 
                 using (StringReader read = new StringReader(xmlDocument.OuterXml))
                 {
@@ -90,7 +92,7 @@ namespace Test2
                     serializer.Serialize(stream, options);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
-                    xmlDocument.Save("twitch.xml");
+                    xmlDocument.Save(Options.fileName);
                 }
             }
             catch (Exception e)

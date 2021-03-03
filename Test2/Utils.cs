@@ -1,32 +1,14 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
 
 namespace Test2
 {
 	internal class Utils
 	{
+        private static List<string> TRUE_VALUES = new List<string> { "true", "x", "1" };
 
-        public static void HandleOnlyNumbersPreviewTextInput(TextCompositionEventArgs e)
+        public static bool isValueTrue(string valueToCheck)
         {
-            if (e.Text.Length == 0 || !char.IsDigit(e.Text[0]))
-            {
-                e.Handled = true;
-            }
-        }
-
-        public static void HandleNoSpacePreviewKeyDown(KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
-        }
-
-        public static void HandleNoCopyPastePreviewExecuted(ExecutedRoutedEventArgs e)
-        {
-            if (e.Command == ApplicationCommands.Copy || e.Command == ApplicationCommands.Cut || e.Command == ApplicationCommands.Paste)
-            {
-                e.Handled = true;
-            }
+            return valueToCheck != null && TRUE_VALUES.Contains(valueToCheck.ToLower());
         }
     }
 }
