@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace Test2
+namespace Mod
 {
     public static class Effects
     {

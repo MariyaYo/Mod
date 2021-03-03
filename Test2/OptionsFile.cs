@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Test2
+namespace Mod
 {
     [GeneratedCode("xsd", "4.0.30319.1")]
     [DebuggerStepThrough]

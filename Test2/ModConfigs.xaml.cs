@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Test2
+namespace Mod
 {
 	public partial class ModConfigs : Window
 	{
